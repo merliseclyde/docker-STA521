@@ -6,6 +6,7 @@ RUN printf "deb http://httpredir.debian.org/debian testing main\ndeb http://http
   && apt-get install -y --no-install-recommends software-properties-common bzip2 \
   && add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
   && apt-get install -y --no-install-recommends curl libgdal-dev libproj-dev \
+  && wget --quiet 
   && wget --quiet http://download.osgeo.org/geos/geos-3.6.0.tar.bz2 \
   && tar xvjf geos-3.6.0.tar.bz2 \
   && cd geos-3.6.0 \
@@ -21,7 +22,7 @@ RUN printf "deb http://httpredir.debian.org/debian testing main\ndeb http://http
 RUN install2.r \
   -r 'https://cran.rstudio.com' \
   --dep TRUE  \
-  jsonlite rgdal rgeos sf ISLR arm GGally \
+   ISLR arm GGally \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
