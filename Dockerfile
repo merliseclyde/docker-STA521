@@ -6,14 +6,12 @@ RUN printf "deb http://httpredir.debian.org/debian testing main\ndeb http://http
   && apt-get install -y --no-install-recommends software-properties-common bzip2 \
   && add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
   && apt-get install -y --no-install-recommends curl libgdal-dev libproj-dev \
-  && wget --quiet 
-  && wget --quiet http://download.osgeo.org/geos/geos-3.6.0.tar.bz2 \
-  && tar xvjf geos-3.6.0.tar.bz2 \
-  && cd geos-3.6.0 \
+  && wget --quiet  http://http.debian.net/debian/pool/main/j/jags/jags_3.4.0.orig.tar.gz \
+  && tar xvjf jags_3.4.0.orig.tar.gz \
+  && cd jags_3.4.0.orig \
   && ./configure \
   && make install \
   && cd .. \
-  && rm -rf geos-3.6.0 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/ \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
@@ -22,7 +20,7 @@ RUN printf "deb http://httpredir.debian.org/debian testing main\ndeb http://http
 RUN install2.r \
   -r 'https://cran.rstudio.com' \
   --dep TRUE  \
-   ISLR arm GGally \
+   ISLR arm GGally caret\
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
