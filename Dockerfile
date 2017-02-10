@@ -1,26 +1,23 @@
-FROM rocker/hadleyverse
+FROM rocker/verse
 MAINTAINER "Merlise Clyde" clyde@duke.edu
 
-RUN printf "deb http://httpredir.debian.org/debian testing main\ndeb http://httpredir.debian.org/debian testing-updates main\ndeb http://security.debian.org testing/updates main\ndeb-src http://http.debian.net/debian testing main\n" > /etc/apt/sources.list \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends software-properties-common bzip2 \
-  && add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
-  && apt-get install -y --no-install-recommends curl libgdal-dev libproj-dev \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends software-properties-common\
   && wget --quiet  http://http.debian.net/debian/pool/main/j/jags/jags_3.4.0.orig.tar.gz \
-  && tar xvjf jags_3.4.0.orig.tar.gz \
-  && cd jags_3.4.0.orig \
+  && tar xvf jags_3.4.0.orig.tar.gz \
+  && cd JAGS-3.4.0 \
   && ./configure \
   && make install \
   && cd .. \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/ \
-  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-
-## Install the tidyverse package, RStudio pkg dev (and some close friends). 
-RUN install2.r \
-  -r 'https://cran.rstudio.com' \
-  --dep TRUE  \
-   ISLR arm GGally caret\
+  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
+##
+## Install the tidyverse package, RStudio pkg dev (and some close friends). \
+  && install2.r \
+   -r 'https://cran.rstudio.com' \
+   --dep TRUE  \
+   ISLR arm GGally caret \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
