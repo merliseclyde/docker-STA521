@@ -1,23 +1,29 @@
-FROM rocker/verse
+FROM rocker/verse:latest
 MAINTAINER "Merlise Clyde" clyde@duke.edu
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends software-properties-common\
-  && wget --quiet  http://http.debian.net/debian/pool/main/j/jags/jags_3.4.0.orig.tar.gz \
-  && tar xvf jags_3.4.0.orig.tar.gz \
-  && cd JAGS-3.4.0 \
-  && ./configure \
-  && make install \
-  && cd .. \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/ \
-  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
-##
-## Install the tidyverse package, RStudio pkg dev (and some close friends). \
-  && install2.r \
-   -r 'https://cran.rstudio.com' \
-   --dep TRUE  \
-   ISLR arm GGally caret \
+RUN apt-get update && apt-get -y install --no-install-recommends \
+  libopenblas-dev \
+  liblapack-dev \
+  librsvg2-dev \
+  libudunits2-dev \
+  libsndfile1-dev \
+  libfftw3-dev \
+  libv8-3.14-dev \
+  libxslt-dev \
+  ## install jags from source, jessie version too old 
+  && wget https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Source/JAGS-4.2.0.tar.gz -O jags.tar.gz \
+  && tar -xf jags.tar.gz \
+  && cd JAGS* && ./configure && make && make install \
+  && cd / && rm -rf jags.tar.gz JAGS* \
+  ## Install R packages from fixed repo
+  && . /etc/environment \
+  && install2.r --error -r $MRAN \
+     FastGP \
+     nimble \
+     rjags \
+     ISLR \                                                                        arm \
+     GGally \
+     caret \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port

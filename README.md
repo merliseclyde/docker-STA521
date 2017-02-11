@@ -23,3 +23,10 @@ The Dockerfile specifies which programs and packages are installed.  Add additio
 `> docker login`
 
 `> docker push merliseclyde/predictive-modeling
+
+### run interactively
+
+docker build -t 20170127_r .
+
+$ docker run -v ~/Desktop/20161213_project/:/project -it 20170127_r bash`
+
