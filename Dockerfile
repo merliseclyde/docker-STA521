@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   libfftw3-dev \
   libv8-3.14-dev \
   libxslt-dev \
-  ## install jags from source, jessie version too old 
+  ## install jags from source, jessie version too old
   && wget https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Source/JAGS-4.2.0.tar.gz -O jags.tar.gz \
   && tar -xf jags.tar.gz \
   && cd JAGS* && ./configure && make && make install \
@@ -21,9 +21,13 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
      FastGP \
      nimble \
      rjags \
-     ISLR \                                                                        arm \
+     ISLR \
+     arm \
      GGally \
      caret \
+     vcd \
+     xtable \
+     stargazer \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
