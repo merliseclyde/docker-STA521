@@ -28,6 +28,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
      vcd \
      xtable \
      stargazer \
+     BMA \
+     BAS \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
