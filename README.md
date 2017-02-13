@@ -26,7 +26,7 @@ The Dockerfile specifies which programs and packages are installed.  Add additio
 
 ### run interactively
 
-docker build -t 20170127_r .
 
-$ docker run -v ~/Desktop/20161213_project/:/project -it 20170127_r bash`
+
+$ docker run -it <Image ID> bash`
 
