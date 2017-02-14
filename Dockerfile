@@ -17,19 +17,10 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   && cd / && rm -rf jags.tar.gz JAGS* \
   ## Install R packages from fixed repo
   && . /etc/environment \
-  && install2.r --error -r $MRAN \
-     FastGP \
-     nimble \
-     rjags \
-     ISLR \
-     arm \
-     GGally \
-     caret \
-     vcd \
-     xtable \
-     stargazer \
-     BMA \
-     BAS \
+  && install2.r \
+  -r $MRAN \
+  -- dep TRUE \
+  httr rjags ISLR arm GGally caret vcd xtable stargazer BMA BAS boot \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## httr authentication uses this port
