@@ -6,9 +6,9 @@ The Dockerfile specifies which programs and packages are installed.  Add additio
 
 ###  pull base image 
 ###  
- this is built from the `jags` docker that adds the jags executible to the rocker/verse image.
+ this is built from the `rocker-bayesian` docker image that adds the jags executible to the rocker/verse image.
 
-`> docker pull merliseclyde/jags`
+`> docker pull  mavelli/rocker-bayesian`
 
 ### build image
 
@@ -20,7 +20,7 @@ The Dockerfile specifies which programs and packages are installed.  Add additio
 
 ### tag the image
 
-`> docker tag [image id]  merliseclyde/predictive-modelling:latest`
+`> docker tag [image id]  merliseclyde/predictive-modeling:latest`
 
 `docker images`
 
